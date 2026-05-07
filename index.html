@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday Mom</title>
+  <style>
+    body {
+      text-align: center;
+      background: url("cake.png") no-repeat center center;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+
+    #message { 
+      display: none; 
+      font-size: 32px; 
+      color: purple; 
+      margin-top: 20px; 
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff66cc, #ffff66, #66ffcc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+    .falling { 
+      position: fixed; 
+      font-size: 30px; 
+      animation: fall 6s linear infinite; 
+    }
+    @keyframes fall { 
+      to { transform: translateY(100vh); } 
+    }
+  </style>
+</head>
+<body>
+ 
+  <!-- Autoplay muted (required for browsers) -->
+  <audio id="song" src="meri-maa.mp3" autoplay muted></audio>
+
+  <script>
+    window.onload = function() {
+      // Flowers rain
+      for(let i=0; i<50; i++) {
+        let item = document.createElement("div");
+        item.className = "falling";
+        item.style.left = Math.random()*100 + "vw";
+        item.style.top = -(Math.random()*200) + "px";
+        let flowers = ["🌸","🌹","🌻","🌼","💐","🌷","🌺"];
+        item.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+        document.body.appendChild(item);
+      }
+
+      // Message shimmer दिखाना
+      document.getElementById("message").style.display = "block";
+
+      // User click par audio play
+      document.body.addEventListener("click", function() {
+        let song = document.getElementById("song");
+        song.muted = false;   // unmute
+        song.play().catch(err => console.log(err)); // handle error
+      });
+    }
+  </script>
+
+  <div id="message">Happy Birthday Mom! 💖✨ Wishing you joy, health, and love always.</div>
+</body>
+</html>
